@@ -76,12 +76,13 @@ const registerStudent = async (req, res) => {
 
     const existing = await Student.findOne({ email });
     if (existing) {
-      return res.status(400).json({
+    return res.status(400).json({
         success: false,
         message: "Email already registered",
-      });
+      });  
     }
 
+    
     const student = await Student.create(req.body);
     const Studentdata = await Student.findById(student._id).select(
       "-password -accessToken -refreshToken"

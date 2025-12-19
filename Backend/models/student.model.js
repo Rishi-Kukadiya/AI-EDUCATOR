@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-
 const studentSchema = new mongoose.Schema(
   {
     fullName: {
@@ -20,7 +19,7 @@ const studentSchema = new mongoose.Schema(
     std: {
       type: Number,
       required: true,
-      enum: [6 , 7 , 8],
+      enum: [6, 7, 8],
     },
 
     school: {
@@ -48,7 +47,9 @@ const studentSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-
+    refreshToken: {
+      type: String,
+    },
     password: {
       type: String,
       required: true,
@@ -62,48 +63,45 @@ const studentSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, 
+    timestamps: true,
   }
 );
 
-studentSchema.pre("save" , async function (next){
-    if(!this.isModified("password")) return next();
-    console.log("changing password");
-    this.password = await bcrypt.hash(this.password , 10);
-    next;
-})
+studentSchema.pre("save", async function () {
+  if (!this.isModified("password")) return ;
+  console.log("changing password");
+  this.password = await bcrypt.hash(this.password, 10);
+});
 
-
-studentSchema.method.isPasswordCorrect = async function (password){
-    if(!password) return false ;
-    return await bcrypt.compare(password , this.password);
-}
+studentSchema.methods.isPasswordCorrect = async function (password) {
+  if (!password) return false;
+  return await bcrypt.compare(password, this.password);
+};
 
 studentSchema.methods.generateAccessToken = async function () {
-    
-    return jwt.sign(
-        {
-            _id: this._id,
-            email: this.email,
-            fullName: this.fullName
-        },
-        process.env.ACCESS_TOKEN_SECRET,
-        {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
-        }
-    )
-}
+  return jwt.sign(
+    {
+      _id: this._id,
+      email: this.email,
+      fullName: this.fullName,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
+    }
+  );
+};
 studentSchema.methods.generateRefreshToken = async function () {
-    return jwt.sign(
-        {
-            _id: this._id
-        },
-        process.env.REFRESH_TOKEN_SECRET,
-        {
-            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
-        }
-    )
-}
+  return jwt.sign(
+    {
+      _id: this._id,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+    }
+  );
+};
 
 const Student = mongoose.model("Student", studentSchema);
 export default Student;
