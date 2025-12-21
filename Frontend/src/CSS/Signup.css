@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #f1f5f9; /* Soft grey background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CONTAINER CARD */
+.signup-container {
+  display: flex;
+  width: 1000px;
+  max-width: 95%;
+  height: 650px; /* Fixed height enables the scroll effect inside */
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* --- LEFT SIDE: SCROLLABLE FORM --- */
+.signup-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  background-color: #ffffff;
+  
+  /* SCROLL LOGIC */
+  overflow-y: auto; /* Enables vertical scrolling only here */
+  height: 100%;     /* Takes full height of container */
+}
+
+/* CUSTOM SCROLLBAR STYLING (Blue & Thin) */
+.signup-left::-webkit-scrollbar {
+  width: 8px;
+}
+
+.signup-left::-webkit-scrollbar-track {
+  background: #f1f5f9; 
+}
+
+.signup-left::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1; 
+  border-radius: 10px;
+  border: 2px solid #f1f5f9;
+}
+
+.signup-left::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8; 
+}
+
+/* Content Width Limiter */
+.form-wrapper {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto; /* Centers the form horizontally */
+}
+
+.brand-title {
+  color: #2563eb;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.heading h2 {
+  font-size: 1.8rem;
+  color: #1e293b;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.heading p {
+  color: #64748b;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+/* FORM GRID (Makes short fields sit side-by-side) */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 15px;
+}
+
+.form-grid .input-group {
+  margin-bottom: 0; /* Let the grid gap handle spacing */
+}
+
+/* INPUTS */
+.input-group {
+  margin-bottom: 1.25rem;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: #475569;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.input-group input, 
+.input-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #0f172a; /* Dark text for visibility */
+  background-color: #f8fafc;
+  outline: none;
+  transition: all 0.2s;
+}
+
+/* Custom Select Dropdown Arrow */
+.input-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #2563eb;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* BUTTON */
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.signup-btn:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.login-redirect {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #64748b;
+  padding-bottom: 20px; /* Extra space at bottom for scrolling */
+}
+
+.login-redirect a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* --- RIGHT SIDE: IMAGE --- */
+.signup-right {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  /* Image stays fixed while left side scrolls */
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .signup-container {
+    flex-direction: column;
+    height: auto;
+    max-height: 90vh; /* Limits height on mobile */
+    width: 90%;
+    max-width: 450px;
+  }
+
+  .signup-right {
+    display: none; /* Hide image on mobile */
+  }
+
+  .signup-left {
+    padding: 30px 20px;
+  }
+}

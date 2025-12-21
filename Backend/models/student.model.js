@@ -47,6 +47,9 @@ const studentSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
+    accessToken:{
+      type:String
+    },
     refreshToken: {
       type: String,
     },
@@ -69,7 +72,6 @@ const studentSchema = new mongoose.Schema(
 
 studentSchema.pre("save", async function () {
   if (!this.isModified("password")) return ;
-  console.log("changing password");
   this.password = await bcrypt.hash(this.password, 10);
 });
 

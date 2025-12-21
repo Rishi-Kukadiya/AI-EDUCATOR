@@ -1,0 +1,74 @@
+/* Loader.css */
+
+/* --- 1. SKELETON SHIMMER EFFECT --- */
+/* Use this for loading text, cards, or profile data */
+.skeleton-loader {
+  background-color: #e2e8f0; /* Base grey */
+  /* The "Shine" Gradient */
+  background-image: linear-gradient(
+    90deg, 
+    #e2e8f0 0px, 
+    #f8fafc 40px, /* Lighter center (the shine) */
+    #e2e8f0 80px
+  );
+  background-size: 600px; /* Large size to move across */
+  border-radius: 6px;
+  animation: shimmer-animation 1.6s infinite linear;
+}
+
+@keyframes shimmer-animation {
+  0% {
+    background-position: -100px; /* Start off-screen left */
+  }
+  100% {
+    background-position: 300px; /* Move to off-screen right */
+  }
+}
+
+/* --- 2. OVERLAY SPINNER (AI PULSE) --- */
+/* Use this when blocking the UI (e.g., Logging in...) */
+.loader-overlay {
+  position: absolute; /* Sits on top of your login card */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+  backdrop-filter: blur(4px); /* Modern frosted glass effect */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  border-radius: inherit; /* Inherits rounded corners from parent */
+}
+
+/* The AI "Brain" Pulse */
+.ai-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(37, 99, 235, 0.1); /* Faint blue ring */
+  border-radius: 50%;
+  border-top-color: #2563eb; /* AI Blue spinning part */
+  animation: spin 1s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.2); /* Blue Glow */
+}
+
+.loader-text {
+  margin-top: 15px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3b82f6;
+  letter-spacing: 0.5px;
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}

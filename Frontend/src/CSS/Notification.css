@@ -1,0 +1,147 @@
+/* Notification.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+.notification-wrapper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999; /* Always on top */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none; /* Allows clicking through empty space */
+}
+
+/* Base Card Style */
+.notification-card {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  width: 320px; /* Optimal width for readability */
+  max-width: 90vw; /* Responsive on mobile */
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+  
+  /* Animation: Slide in from right */
+  animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Hiding state */
+.notification-card.closing {
+  animation: slideOut 0.3s ease forwards;
+}
+
+/* --- COLOR THEMES --- */
+
+/* Success Theme (Matches your AI Blue) */
+.notification-card.success {
+  border-left: 5px solid #2563eb;
+}
+.notification-card.success .icon-box {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+
+/* Error Theme (Soft Red) */
+.notification-card.error {
+  border-left: 5px solid #ef4444;
+}
+.notification-card.error .icon-box {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* --- CONTENT LAYOUT --- */
+
+.icon-box {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 14px;
+}
+
+.message-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.notification-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.notification-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.4;
+  word-wrap: break-word; /* Handles long messages gracefully */
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  padding: 4px;
+  margin-left: 10px;
+  display: flex;
+  align-items: flex-start;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #1e293b;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Mobile Tweak */
+@media (max-width: 480px) {
+  .notification-wrapper {
+    right: 50%;
+    transform: translateX(50%); /* Center horizontally on mobile */
+    top: 10px;
+    width: 90%;
+  }
+  .notification-card {
+    width: 100%;
+  }
+}

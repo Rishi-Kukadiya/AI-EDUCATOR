@@ -75,7 +75,7 @@ const registerStudent = async (req, res) => {
     }
 
     const existing = await Student.findOne({ email });
-    if (existing) {
+    if (existing) {  
     return res.status(400).json({
         success: false,
         message: "Email already registered",
