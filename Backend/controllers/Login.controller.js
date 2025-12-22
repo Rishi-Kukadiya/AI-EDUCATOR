@@ -62,6 +62,7 @@ const LoginStudent = async (req, res) => {
         success: true,
         message: "Student Login successfully",
         loggedInUser,
+        accessToken,
       });
   } catch (err) {
     console.log(err);

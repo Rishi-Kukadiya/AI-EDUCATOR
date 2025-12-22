@@ -1,9 +1,10 @@
 import jwt from "jsonwebtoken";
 import Student from "../models/student.model.js";
 
-export const verifyJWT = async (req, res, next) => {
+const verifyJWT = async (req, res, next) => {
   try {
     const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "");
+    
     if (!token) {
         return res.status(401).json({
             success: false,
@@ -11,8 +12,8 @@ export const verifyJWT = async (req, res, next) => {
         })
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await Student.findById(decoded.id).select("-password -refreshToken");
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const user = await Student.findById(decoded._id).select("-password -refreshToken");
     if (!user) {
         return res.status(401).json({
             success: false,
@@ -28,3 +29,5 @@ export const verifyJWT = async (req, res, next) => {
     });
   }
 };
+
+export default verifyJWT;
