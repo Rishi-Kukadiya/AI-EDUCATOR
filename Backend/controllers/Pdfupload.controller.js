@@ -4,7 +4,7 @@ import fs from "fs";
 
 const Pdfuploader = async (req, res) => {
   try {
-    const { standard, subject, chapterName } = req.body;
+    const { standard, subject, chapterName , board } = req.body;
 
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: "chapter_pdfs",
@@ -19,6 +19,7 @@ const Pdfuploader = async (req, res) => {
       standard,
       subject,
       chapterName,
+      board,
       pdfUrl: result.secure_url,
     });
 

@@ -284,10 +284,9 @@ const Signup = () => {
                   value={formData.board}
                   onChange={handleChange}
                 >
-                  <option value="GSEB">GSEB</option>
+
                   <option value="CBSE">CBSE</option>
-                  <option value="ICSE">ICSE</option>
-                  <option value="Other">Other</option>
+                  <option value="GSEB">GSEB</option>
                 </select>
               </div>
             </div>

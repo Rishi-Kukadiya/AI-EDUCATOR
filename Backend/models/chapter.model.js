@@ -5,7 +5,8 @@ const chapterSchema = new mongoose.Schema(
     standard: { type: Number, required: true },
     subject: { type: String, required: true },
     chapterName: { type: String, required: true },
-    pdfUrl: { type: String, required: true }, // reference to stored file
+    board : {type : String , required : true}, 
+    pdfUrl: { type: String, required: true }, 
   },
   { timestamps: true }
 );
