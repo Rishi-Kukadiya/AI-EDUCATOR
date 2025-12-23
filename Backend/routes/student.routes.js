@@ -3,9 +3,11 @@ import { registerStudent } from "../controllers/registration.controller.js";
 import LoginStudent from "../controllers/Login.controller.js";
 import Dashboard from "../controllers/Dashboard.controller.js";
 import verifyJWT from "../middleware/auth.middleware.js";
+import GoogleAuth from "../controllers/GoogleAuth.controller.js";
 const studentRoute = Router();
 
 studentRoute.route("/register").post(registerStudent);
+studentRoute.route("/google").post(GoogleAuth);
 studentRoute.route("/login").post(LoginStudent);
 studentRoute.route("/authenticate").get(verifyJWT, (req, res) => {
   return res.status(200).json({

@@ -75,3 +75,4 @@ const LoginStudent = async (req, res) => {
 };
 
 export default LoginStudent;
+export {generateAccessAndRefreshTokens} ;
