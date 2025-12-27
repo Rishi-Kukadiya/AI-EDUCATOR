@@ -4,6 +4,7 @@ import LoginStudent from "../controllers/Login.controller.js";
 import Dashboard from "../controllers/Dashboard.controller.js";
 import verifyJWT from "../middleware/auth.middleware.js";
 import GoogleAuth from "../controllers/GoogleAuth.controller.js";
+import Genquiz from "../controllers/Genquiz.controller.js";
 const studentRoute = Router();
 
 studentRoute.route("/register").post(registerStudent);
@@ -16,4 +17,5 @@ studentRoute.route("/authenticate").get(verifyJWT, (req, res) => {
   });
 });
 studentRoute.route("/dashboard").get(verifyJWT, Dashboard);
+studentRoute.route("/generatequiz").post(verifyJWT , Genquiz);  
 export default studentRoute;
